@@ -9,7 +9,7 @@ import {
 
 const router = express.Router();
 
-router.route("/", getAllRecords);
+router.get("/", getAllRecords);
 router
   .route("/:id")
   .get(getRecord)
