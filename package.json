@@ -1,0 +1,26 @@
+{
+  "name": "finledger",
+  "version": "1.0.0",
+  "description": "Internal finance data management API with role-based access control",
+  "main": "src/server.js",
+  "scripts": {
+    "start": "node src/server.js",
+    "dev": "nodemon src/server.js"
+  },
+  "keywords": [
+    "finance",
+    "api",
+    "rest",
+    "express"
+  ],
+  "author": "Thirumalarao Parasavedi",
+  "license": "ISC",
+  "type": "module",
+  "dependencies": {
+    "dotenv": "^17.4.0",
+    "express": "^5.2.1"
+  },
+  "devDependencies": {
+    "nodemon": "^3.1.14"
+  }
+}
