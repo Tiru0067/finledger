@@ -23,6 +23,10 @@ app.use("/dashboard", dashboardRoutes);
 // Start the server
 const PORT = process.env.PORT || 5001;
 
-app.listen(PORT, () =>
-  console.log(`Server running at http://localhost:${PORT}`),
-);
+app.listen(PORT, () => {
+  if (process.env.NODE_ENV === "development") {
+    console.log(`Server running at http://localhost:${PORT}`);
+  } else {
+    console.log(`Server started on port ${PORT}`);
+  }
+});
