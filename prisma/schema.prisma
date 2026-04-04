@@ -34,6 +34,8 @@ model User {
   updatedAt     DateTime @updatedAt
 
   records       Record[]
+
+  @@map("users")
 }
 
 model Record {
@@ -49,4 +51,6 @@ model Record {
 
   createdBy   Int
   user        User       @relation(fields: [createdBy], references: [id])
+
+  @@map("records")
 }
