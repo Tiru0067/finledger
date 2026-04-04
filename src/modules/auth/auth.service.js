@@ -20,9 +20,13 @@ export const loginService = async (email, password) => {
   if (status === "inactive") throw new AppError("Account is inactive", 403);
 
   // 4. generate token
-  const token = jwt.sign({ id, email: user.email }, process.env.SECRET_KEY, {
-    expiresIn: "8h",
-  });
+  const token = jwt.sign(
+    { id, email: user.email, role },
+    process.env.SECRET_KEY,
+    {
+      expiresIn: "8h",
+    },
+  );
 
   return {
     token,
