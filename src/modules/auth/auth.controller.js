@@ -1,4 +1,9 @@
-export const login = async (req, res) => {
+import asyncHandler from "../../utils/asyncHandler.js";
+import sendResponse from "../../utils/response.js";
+import { loginService } from "./auth.service.js";
+
+export const login = asyncHandler(async (req, res) => {
   const { email, password } = req.body;
-  res.status(200).json({ message: "POST /auth/login - not implemented yet" });
-};
+  const data = await loginService(email, password);
+  sendResponse(res, 200, "Login successful", data);
+});
