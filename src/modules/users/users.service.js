@@ -33,7 +33,6 @@ export const createUserService = async (name, email, password) => {
     });
     return { user: newUser };
   } catch (error) {
-    console.log(error);
     if (error.code === "P2002") {
       throw new AppError("Email already exists", 409);
     }
@@ -71,13 +70,19 @@ export const updateUserService = async (id, fields) => {
     updates.password = await bcrypt.hash(updates.password, 10);
   }
 
-  const updatedUser = await prisma.user.update({
-    where: { id },
-    data: updates,
-    omit: { password: true, isSuperAdmin: true }, // exclude sensitive fields
-  });
-
-  return { updatedUser };
+  try {
+    const updatedUser = await prisma.user.update({
+      where: { id },
+      data: updates,
+      omit: { password: true, isSuperAdmin: true },
+    });
+    return { updatedUser };
+  } catch (error) {
+    if (error.code === "P2002") {
+      throw new AppError("Email already exists", 409);
+    }
+    throw error;
+  }
 };
 
 export const deleteUserService = async (id) => {
