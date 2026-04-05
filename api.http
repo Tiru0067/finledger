@@ -1,0 +1,134 @@
+@baseUrl = http://localhost:5001/api
+@adminToken = 
+@analystToken = 
+@viewerToken = 
+
+### ==================
+### AUTH
+### ==================
+
+### Login as Admin
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "arjun@finledger.com",
+  "password": "Arjun@123"
+}
+
+### Login as Analyst
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "priya@finledger.com",
+  "password": "Priya@123"
+}
+
+### Login as Viewer
+POST {{baseUrl}}/auth/login
+Content-Type: application/json
+
+{
+  "email": "ravi@finledger.com",
+  "password": "Ravi@123"
+}
+
+### ==================
+### USERS (admin only)
+### ==================
+
+### Get All Users
+GET {{baseUrl}}/users
+Authorization: Bearer {{adminToken}}
+
+### Get Single User
+GET {{baseUrl}}/users/1
+Authorization: Bearer {{adminToken}}
+
+### Create User
+POST {{baseUrl}}/users
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+  "name": "John Doe",
+  "email": "john@finledger.com",
+  "password": "Test@1234"
+}
+
+### Update User
+PATCH {{baseUrl}}/users/1
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+  "role": "analyst"
+}
+
+### Deactivate User
+DELETE {{baseUrl}}/users/1
+Authorization: Bearer {{adminToken}}
+
+### ==================
+### RECORDS
+### ==================
+
+### Get All Records
+GET {{baseUrl}}/records
+Authorization: Bearer {{adminToken}}
+
+### Get All Records with Filters
+GET {{baseUrl}}/records?type=income&category=salary
+Authorization: Bearer {{adminToken}}
+
+### Get Single Record
+GET {{baseUrl}}/records/1
+Authorization: Bearer {{adminToken}}
+
+### Create Record
+POST {{baseUrl}}/records
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+  "amount": 5000,
+  "type": "income",
+  "category": "salary",
+  "date": "2026-04-01",
+  "notes": "Monthly salary"
+}
+
+### Update Record
+PATCH {{baseUrl}}/records/1
+Content-Type: application/json
+Authorization: Bearer {{adminToken}}
+
+{
+  "amount": 6000,
+  "notes": "Updated salary"
+}
+
+### Delete Record
+DELETE {{baseUrl}}/records/1
+Authorization: Bearer {{adminToken}}
+
+### ==================
+### DASHBOARD
+### ==================
+
+### Dashboard Summary
+GET {{baseUrl}}/dashboard
+Authorization: Bearer {{viewerToken}}
+
+### Category Breakdown
+GET {{baseUrl}}/dashboard/categories
+Authorization: Bearer {{analystToken}}
+
+### Recent Transactions
+GET {{baseUrl}}/dashboard/recent
+Authorization: Bearer {{viewerToken}}
+
+### Trends
+GET {{baseUrl}}/dashboard/trends
+Authorization: Bearer {{analystToken}}
