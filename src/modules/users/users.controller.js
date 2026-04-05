@@ -9,7 +9,8 @@ import {
 } from "./users.service.js";
 
 export const getAllUsers = asyncHandler(async (req, res) => {
-  const data = await getAllUsersService();
+  const status = req.query.status || "active";
+  const data = await getAllUsersService(status);
   sendResponse(res, 200, "Users loaded successfully", data);
 });
 

@@ -2,8 +2,9 @@ import { prisma } from "../../config/db.js";
 import AppError from "../../utils/AppError.js";
 import bcrypt from "bcrypt";
 
-export const getAllUsersService = async () => {
+export const getAllUsersService = async (status) => {
   const users = await prisma.user.findMany({
+    where: status === "all" ? {} : { status },
     omit: { password: true, isSuperAdmin: true }, // exclude sensitive fields
   });
   return { users };
