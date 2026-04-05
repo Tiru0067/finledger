@@ -4,6 +4,7 @@ import {
   getAllRecordsService,
   getRecordService,
   createRecordService,
+  deleteRecordService,
 } from "./records.service.js";
 
 export const getAllRecords = asyncHandler(async (req, res) => {
@@ -14,8 +15,7 @@ export const getAllRecords = asyncHandler(async (req, res) => {
 
 export const getRecord = asyncHandler(async (req, res) => {
   const { id } = req.params;
-  const includeDeleted = req.query.includeDeleted === "true";
-  const data = await getRecordService(id, includeDeleted, req.user.role);
+  const data = await getRecordService(id, req.user.role);
   sendResponse(res, 200, "Record loaded successfully", data);
 });
 
@@ -40,8 +40,8 @@ export const updateRecord = asyncHandler(async (req, res) => {
   sendResponse(res, 201, "Record updated successfully", data);
 });
 
-export const deleteRecord = (req, res) => {
-  res
-    .status(204)
-    .json({ message: "DELETE /records/:id - not implemented yet" });
-};
+export const deleteRecord = asyncHandler(async (req, res) => {
+  const { id } = req.params;
+  const data = await deleteRecordService(id);
+  sendResponse(res, 200, "Record deleted successfully", data);
+});

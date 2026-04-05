@@ -15,18 +15,11 @@ export const getAllRecordsService = async (
   return { records };
 };
 
-export const getRecordService = async (
-  id,
-  includeDeleted = false,
-  userRole,
-) => {
-  if (includeDeleted && userRole !== "admin") {
-    throw new AppError("Only admins can view deleted records", 403);
-  }
-
+export const getRecordService = async (id, userRole) => {
   const record = await prisma.record.findUnique({ where: { id } });
   if (!record) throw new AppError("Record not found", 404);
-  if (!includeDeleted && record.deletedAt) {
+
+  if (record.deletedAt && userRole !== "admin") {
     throw new AppError("Record not found", 404);
   }
 
