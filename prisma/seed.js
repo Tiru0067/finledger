@@ -1,8 +1,10 @@
 import "dotenv/config";
 import bcrypt from "bcrypt";
-import { PrismaClient } from "@prisma/client";
+import pkg from "@prisma/client";
 import { PrismaNeon } from "@prisma/adapter-neon";
 import { neon } from "@neondatabase/serverless";
+
+const { PrismaClient } = pkg;
 
 const sql = neon(process.env.DATABASE_URL);
 const adapter = new PrismaNeon({ connectionString: process.env.DATABASE_URL });
