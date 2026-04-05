@@ -52,7 +52,7 @@ model User {
 }
 
 model Record {
-  id          BigInt     @id @default(autoincrement())
+  id          Int     @id @default(autoincrement())
   amount      Decimal    @db.Decimal(15, 2)
   type        RecordType
   category    Category
