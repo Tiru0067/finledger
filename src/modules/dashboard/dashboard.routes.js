@@ -1,4 +1,6 @@
 import express from "express";
+import authMiddleware from "../../middlewares/auth.js";
+import authorize from "../../middlewares/authorize.js";
 import {
   getDashboardSummary,
   getDashboardCategories,
@@ -8,9 +10,19 @@ import {
 
 const router = express.Router();
 
-router.get("/", getDashboardSummary);
-router.get("/categories", getDashboardCategories);
-router.get("/trends", getDashboardTrends);
-router.get("/recent", getDashboardRecentTransactions);
+router.use(authMiddleware);
+
+router.get("/", authorize("viewer", "analyst", "admin"), getDashboardSummary);
+router.get(
+  "/categories",
+  authorize("analyst", "admin"),
+  getDashboardCategories,
+);
+router.get("/trends", authorize("analyst", "admin"), getDashboardTrends);
+router.get(
+  "/recent",
+  authorize("analyst", "admin"),
+  getDashboardRecentTransactions,
+);
 
 export default router;
