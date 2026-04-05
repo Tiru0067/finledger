@@ -2,6 +2,10 @@
 
 A backend REST API for managing financial records with role-based access control. Built as part of a backend engineering internship screening assignment for Zorvyn FinTech.
 
+**Live API:** https://finledger-ufpb.onrender.com/api
+
+> ⚠️ Hosted on Render's free tier. First request may take up to 50 seconds if the server has been idle.
+
 ---
 
 ## What This Project Does
