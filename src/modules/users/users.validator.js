@@ -19,6 +19,10 @@ const validatePassword = (password) => {
 //
 //
 export const validateCreateUser = (req, res, next) => {
+  if (!req.body || Object.keys(req.body).length === 0) {
+    return next(new AppError("Request body is required", 400));
+  }
+
   const { name, email, password } = req.body;
 
   // check missing fields
@@ -48,6 +52,10 @@ export const validateCreateUser = (req, res, next) => {
 };
 
 export const validateUpdateUser = (req, res, next) => {
+  if (!req.body || Object.keys(req.body).length === 0) {
+    return next(new AppError("Request body is required", 400));
+  }
+
   const { name, email, password, role, status } = req.body;
 
   // all fields optional — only validate what's provided
