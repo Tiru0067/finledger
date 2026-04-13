@@ -1,6 +1,6 @@
 # FinLedger
 
-A backend REST API for managing financial records with role-based access control. Built as part of a backend engineering internship screening assignment for Zorvyn FinTech.
+A backend REST API for managing financial records with role-based access control.
 
 **Live API:** https://finledger-ufpb.onrender.com/api
 
@@ -393,7 +393,6 @@ The following users are pre-seeded for testing:
 
 ## Author
 
-**Thirumalarao Parasavedi**  
-Backend Developer Intern Candidate — Zorvyn FinTech Screening Assignment
+**Thirumalarao Parasavedi**
 
 ---
